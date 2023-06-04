@@ -1,0 +1,15 @@
+###Testing server status
+GET http://localhost:8000/
+
+
+### Get all the task from api
+GET http://localhost:8000/api/v1/task
+
+### Post the task to api
+POST http://localhost:8000/api/v1/task
+
+### Update the task at api
+PUT http://localhost:8000/api/v1/task
+
+### Delete the task from api
+DELETE  http://localhost:8000/api/v1/task
