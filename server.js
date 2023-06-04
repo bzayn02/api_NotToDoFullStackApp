@@ -1,7 +1,10 @@
-import express from 'express';
+import express, { urlencoded } from 'express';
 
 const app = express();
 const PORT = 8000;
+
+// Middleware
+app.use(express.json());
 
 // API endpoints
 import taskRouter from './src/routers/taskRouter.js';

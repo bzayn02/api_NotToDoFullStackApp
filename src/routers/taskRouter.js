@@ -1,17 +1,22 @@
 import express from 'express';
 const router = express.Router();
 
+const fakeDB = [];
 // Read data from database and return to the client
 router.get('/', (req, res) => {
   res.json({
-    message: 'To Do Get Method',
+    message: 'Here are the lists of tasks.',
+    data: fakeDB,
   });
 });
 
 // Receive data from client and create new record in database
 router.post('/', (req, res) => {
+  console.log('got hit');
+  console.log(req.body);
+  fakeDB.push(req.body);
   res.json({
-    message: 'To Do Post Method',
+    message: 'New task has been added successfully.',
   });
 });
 

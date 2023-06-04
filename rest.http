@@ -7,6 +7,14 @@ GET http://localhost:8000/api/v1/task
 
 ### Post the task to api
 POST http://localhost:8000/api/v1/task
+Content-Type: application/json
+
+{
+    "task":"Reading",
+    "hr":"33",
+    "type":"entry",
+    "_id":"asdf"
+}
 
 ### Update the task at api
 PUT http://localhost:8000/api/v1/task
