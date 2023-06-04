@@ -19,5 +19,12 @@ Content-Type: application/json
 ### Update the task at api
 PUT http://localhost:8000/api/v1/task
 
+
+
 ### Delete the task from api
 DELETE  http://localhost:8000/api/v1/task
+Content-Type: application/json
+
+{
+    "_id":"asdfg"
+}
