@@ -10,10 +10,9 @@ POST http://localhost:8000/api/v1/task
 Content-Type: application/json
 
 {
-    "task":"Reading",
-    "hr":"33",
-    "type":"entry",
-    "_id":"678"
+    "task":"Sleeping",
+    "hour":"33",
+    "type":"entry"
 }
 
 ### Update the task at api
@@ -21,7 +20,7 @@ PATCH http://localhost:8000/api/v1/task
 Content-Type: application/json
 
 {
-    "_id":"123",
+    "_id":"64850a4d9e87e5f7dff02760",
     "type":"bad"
 }
 

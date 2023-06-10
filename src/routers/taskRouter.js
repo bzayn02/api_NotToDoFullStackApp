@@ -1,66 +1,64 @@
 import express from 'express';
+import { createTask, readTasks, switchTask } from '../model/TaskModel.js';
 const router = express.Router();
 
-let fakeDB = [
-  {
-    task: 'Coding',
-    hr: '33',
-    _id: '123',
-    type: 'entry',
-  },
-  {
-    task: 'Reading',
-    hr: '33',
-    _id: '321',
-    type: 'entry',
-  },
-  {
-    task: 'Cooking',
-    hr: '33',
-    _id: '456',
-    type: 'entry',
-  },
-  {
-    task: 'Youtube',
-    hr: '33',
-    _id: '654',
-    type: 'entry',
-  },
-];
-
 // Read data from database and return to the client
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+  // Get data from DB
+
+  const taskList = await readTasks();
   res.json({
     message: 'Here are the lists of tasks.',
-    data: fakeDB,
+    tasks: taskList,
   });
 });
 
 // Receive data from client and create new record in database
-router.post('/', (req, res) => {
-  console.log('got hit');
-  fakeDB.push(req.body);
-  res.json({
-    message: 'New task has been added successfully.',
-    data: fakeDB,
-  });
+router.post('/', async (req, res) => {
+  try {
+    const result = await createTask(req.body);
+
+    result?._id
+      ? res.json({
+          status: 'Success',
+          message: 'New task has been added successfully.',
+        })
+      : res.json({
+          status: 'Error',
+          message: 'New task has been added successfully.',
+        });
+  } catch (error) {
+    res.json({
+      status: 'Error',
+      message: 'New task has been added successfully.',
+    });
+  }
 });
 
 // Update record in database based on the info received
-router.patch('/', (req, res) => {
-  const { _id, type } = req.body;
-  console.log(_id, type);
+router.patch('/', async (req, res) => {
+  try {
+    const { _id, type } = req.body;
 
-  const updatedDB = fakeDB.map((item) => {
-    if (item._id === _id) {
-      item.type = type;
-    }
-    return item;
-  });
-  res.json({
-    message: 'Data type updated',
-    NewData: updatedDB,
-  });
+    // Update Data in DB
+    const result = await switchTask(_id, type);
+    console.log(result);
+
+    result?._id
+      ? res.json({
+          status: 'Success',
+          message: 'Type of data updated',
+        })
+      : res.json({
+          status: 'Error',
+          message: 'The task did not switch.',
+        });
+  } catch (error) {
+    res.json({
+      status: 'Error',
+      message: 'The task did not switch. Something is wrong.',
+    });
+  }
 });
 
 // Delete one or many records from  data database based on info received
