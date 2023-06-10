@@ -1,7 +1,7 @@
 ###Testing server status
 GET http://localhost:8000/
 
-
+// --------------------------------- Task Routers Below------------------------------------
 ### Get all the task from api
 GET http://localhost:8000/api/v1/task
 
@@ -13,11 +13,17 @@ Content-Type: application/json
     "task":"Reading",
     "hr":"33",
     "type":"entry",
-    "_id":"asdf"
+    "_id":"678"
 }
 
 ### Update the task at api
-PUT http://localhost:8000/api/v1/task
+PATCH http://localhost:8000/api/v1/task
+Content-Type: application/json
+
+{
+    "_id":"123",
+    "type":"bad"
+}
 
 
 
@@ -26,5 +32,19 @@ DELETE  http://localhost:8000/api/v1/task
 Content-Type: application/json
 
 {
-    "_id":"asdfg"
+    "_id":"123"
 }
+
+
+
+
+
+
+
+
+
+
+
+
+// To Dos
+

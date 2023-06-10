@@ -1,4 +1,4 @@
-import express, { urlencoded } from 'express';
+import express from 'express';
 
 const app = express();
 const PORT = 8000;
@@ -7,8 +7,10 @@ const PORT = 8000;
 app.use(express.json());
 
 // API endpoints
+// Task Router
 import taskRouter from './src/routers/taskRouter.js';
 
+// Routers
 app.use('/api/v1/task', taskRouter);
 
 // Should be at the bottom

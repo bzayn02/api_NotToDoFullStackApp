@@ -5,25 +5,25 @@ let fakeDB = [
   {
     task: 'Coding',
     hr: '33',
-    _id: 'asdf',
+    _id: '123',
     type: 'entry',
   },
   {
     task: 'Reading',
     hr: '33',
-    _id: 'asdfg',
+    _id: '321',
     type: 'entry',
   },
   {
     task: 'Cooking',
     hr: '33',
-    _id: 'asdfga',
+    _id: '456',
     type: 'entry',
   },
   {
     task: 'Youtube',
     hr: '33',
-    _id: 'asdfgh',
+    _id: '654',
     type: 'entry',
   },
 ];
@@ -42,15 +42,24 @@ router.post('/', (req, res) => {
   fakeDB.push(req.body);
   res.json({
     message: 'New task has been added successfully.',
+    data: fakeDB,
   });
 });
 
 // Update record in database based on the info received
-router.put('/', (req, res) => {
-  const { _id } = req.body;
-  console.log(_id);
+router.patch('/', (req, res) => {
+  const { _id, type } = req.body;
+  console.log(_id, type);
+
+  const updatedDB = fakeDB.map((item) => {
+    if (item._id === _id) {
+      item.type = type;
+    }
+    return item;
+  });
   res.json({
-    message: 'To Do Put Method',
+    message: 'Data type updated',
+    NewData: updatedDB,
   });
 });
 
@@ -68,5 +77,10 @@ router.delete('/', (req, res) => {
     newData: fakeDB,
   });
 });
+
+// Router.all
+// router.all("/", (req,res)=>{
+//   console.log("This router takes all the methods as app.use")
+// })
 
 export default router;
