@@ -20,3 +20,9 @@ export const switchTask = (_id, type) => {
   // Everything should be passed as object
   return TaskSchema.findByIdAndUpdate(_id, { type });
 };
+
+// Delete Task
+
+export const deleteTaskByID = (_id) => {
+  return TaskSchema.findByIdAndDelete(_id);
+};

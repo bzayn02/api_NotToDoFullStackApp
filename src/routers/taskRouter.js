@@ -1,5 +1,10 @@
 import express from 'express';
-import { createTask, readTasks, switchTask } from '../model/TaskModel.js';
+import {
+  createTask,
+  deleteTaskByID,
+  readTasks,
+  switchTask,
+} from '../model/TaskModel.js';
 const router = express.Router();
 
 // Read data from database and return to the client
@@ -62,18 +67,27 @@ router.patch('/', async (req, res) => {
 });
 
 // Delete one or many records from  data database based on info received
-router.delete('/', (req, res) => {
-  const { _id } = req.body;
-  console.log(_id);
+router.delete('/:_id', async (req, res) => {
+  try {
+    const { _id } = req.params;
+    const result = await deleteTaskByID(_id);
 
-  // deleting data from fakedb
-
-  fakeDB = fakeDB.filter((item) => item._id !== _id);
-
-  res.json({
-    message: 'The task is deleted successfully.',
-    newData: fakeDB,
-  });
+    result?._id
+      ? res.json({
+          status: 'Success',
+          message: 'The task is deleted successfully.',
+        })
+      : res.json({
+          status: 'Error',
+          message: 'Unable to delete the task.',
+        });
+  } catch (error) {
+    console.log(error);
+    res.json({
+      status: 'Error',
+      message: 'Error deleting task',
+    });
+  }
 });
 
 // Router.all

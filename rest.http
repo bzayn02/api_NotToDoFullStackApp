@@ -27,12 +27,7 @@ Content-Type: application/json
 
 
 ### Delete the task from api
-DELETE  http://localhost:8000/api/v1/task
-Content-Type: application/json
-
-{
-    "_id":"123"
-}
+DELETE  http://localhost:8000/api/v1/task/6485083ede3ce5850eeda672
 
 
 
