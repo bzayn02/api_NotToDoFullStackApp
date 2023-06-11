@@ -13,8 +13,9 @@ router.get('/', async (req, res) => {
 
   const taskList = await readTasks();
   res.json({
+    status: 'success',
     message: 'Here are the lists of tasks.',
-    tasks: taskList,
+    taskList,
   });
 });
 
@@ -25,17 +26,17 @@ router.post('/', async (req, res) => {
 
     result?._id
       ? res.json({
-          status: 'Success',
+          status: 'success',
           message: 'New task has been added successfully.',
         })
       : res.json({
-          status: 'Error',
-          message: 'New task has been added successfully.',
+          status: 'error',
+          message: 'Unable to add the task.',
         });
   } catch (error) {
     res.json({
-      status: 'Error',
-      message: 'New task has been added successfully.',
+      status: 'error',
+      message: 'Something is wrong, unable to add task.',
     });
   }
 });
@@ -51,16 +52,16 @@ router.patch('/', async (req, res) => {
 
     result?._id
       ? res.json({
-          status: 'Success',
+          status: 'success',
           message: 'Type of data updated',
         })
       : res.json({
-          status: 'Error',
+          status: 'error',
           message: 'The task did not switch.',
         });
   } catch (error) {
     res.json({
-      status: 'Error',
+      status: 'error',
       message: 'The task did not switch. Something is wrong.',
     });
   }
@@ -74,17 +75,17 @@ router.delete('/:_id', async (req, res) => {
 
     result?._id
       ? res.json({
-          status: 'Success',
+          status: 'success',
           message: 'The task is deleted successfully.',
         })
       : res.json({
-          status: 'Error',
+          status: 'error',
           message: 'Unable to delete the task.',
         });
   } catch (error) {
     console.log(error);
     res.json({
-      status: 'Error',
+      status: 'error',
       message: 'Error deleting task',
     });
   }
