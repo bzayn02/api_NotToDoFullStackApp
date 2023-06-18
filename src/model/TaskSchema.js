@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 // Schema creates table
-const taskSchema = new mongoose.Schema({
+const taskSchema = new Schema({
   task: {
     type: String,
     required: true,
@@ -16,4 +16,4 @@ const taskSchema = new mongoose.Schema({
 
 // Creating table name tasks
 
-export default mongoose.model('Task', taskSchema);
+export default model('Task', taskSchema);
