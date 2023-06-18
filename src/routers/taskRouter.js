@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   createTask,
+  deleteManyTasks,
   deleteTaskByID,
   readTasks,
   switchTask,
@@ -68,12 +69,12 @@ router.patch('/', async (req, res) => {
 });
 
 // Delete one or many records from  data database based on info received
-router.delete('/:_id', async (req, res) => {
+router.delete('/', async (req, res) => {
   try {
-    const { _id } = req.params;
-    const result = await deleteTaskByID(_id);
+    // req.body contains array of ids
+    const result = await deleteManyTasks(req.body);
 
-    result?._id
+    result?.deletedCount > 0
       ? res.json({
           status: 'success',
           message: 'The task is deleted successfully.',

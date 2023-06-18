@@ -21,8 +21,18 @@ export const switchTask = (_id, type) => {
   return TaskSchema.findByIdAndUpdate(_id, { type });
 };
 
-// Delete Task
+// Delete One Task
 
 export const deleteTaskByID = (_id) => {
   return TaskSchema.findByIdAndDelete(_id);
+};
+
+// Delete Many Tasks
+// ids should be an array
+export const deleteManyTasks = (ids) => {
+  return TaskSchema.deleteMany({
+    _id: {
+      $in: ids,
+    },
+  });
 };
