@@ -5,7 +5,7 @@ dotenv.config();
 import cors from 'cors';
 
 const app = express();
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 import path from 'path';
 
@@ -15,7 +15,6 @@ const __dirname = path.resolve();
 
 // Connecting Mongo database
 import { mongoConnect } from './src/config/mongoDB.js';
-mongoConnect();
 
 // Middleware
 app.use(express.json());
@@ -42,8 +41,14 @@ app.get('/', (req, res) => {
 });
 
 // Server listening the port
-app.listen(PORT, (error) => {
-  error
-    ? console.log(error.message)
-    : console.log(`Server is running at http://localhost:${PORT}`);
-});
+mongoConnect()
+  .then(() => {
+    app.listen(PORT, (error) => {
+      error
+        ? console.log(error.message)
+        : console.log(`Server is running at http://localhost:${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log(error.message);
+  });

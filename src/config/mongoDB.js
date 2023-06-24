@@ -10,7 +10,9 @@ export const mongoConnect = async () => {
     const con = await mongoose.connect(dbLink);
     // console.log(con);
     con && console.log('Mongo database is connected!');
+    return true;
   } catch (error) {
     console.log(error.message);
+    throw new Error(error);
   }
 };
