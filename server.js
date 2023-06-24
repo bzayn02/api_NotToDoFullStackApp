@@ -24,6 +24,7 @@ app.use(express.static(__dirname + '/build'));
 // API endpoints
 // Task Router
 import taskRouter from './src/routers/taskRouter.js';
+import mongoose from 'mongoose';
 
 // Routers
 app.use('/api/v1/task', taskRouter);
@@ -41,7 +42,8 @@ app.get('/', (req, res) => {
 });
 
 // Server listening the port
-mongoConnect()
+mongoose
+  .connect(process.env.MONGO_CLIENT)
   .then(() => {
     console.log('MongoDB is connected');
     app.listen(PORT, (error) => {
