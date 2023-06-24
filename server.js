@@ -47,7 +47,7 @@ const dbLink =
 
 // Server listening the port
 mongoose
-  .connect(dbLink)
+  .connect(process.env.MONGO_CLIENT)
   .then(() => {
     console.log('MongoDB is connected');
     app.listen(PORT, (error) => {
