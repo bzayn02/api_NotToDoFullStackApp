@@ -41,9 +41,14 @@ app.get('/', (req, res) => {
   });
 });
 
+const dbLink =
+  process.env.NODE_ENV !== 'production'
+    ? 'mongodb://localhost:27017/TaskManager'
+    : process.env.MONGO_CLIENT;
 // Server listening the port
+
 mongoose
-  .connect(process.env.MONGO_CLIENT)
+  .connect(dbLink)
   .then(() => {
     console.log('MongoDB is connected');
     app.listen(PORT, (error) => {
