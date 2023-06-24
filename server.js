@@ -43,6 +43,7 @@ app.get('/', (req, res) => {
 // Server listening the port
 mongoConnect()
   .then(() => {
+    console.log('MongoDB is connected');
     app.listen(PORT, (error) => {
       error
         ? console.log(error.message)
