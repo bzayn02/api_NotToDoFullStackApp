@@ -14,7 +14,6 @@ const __dirname = path.resolve();
 // console.log(process.env);
 
 // Connecting Mongo database
-import { mongoConnect } from './src/config/mongoDB.js';
 
 // Middleware
 app.use(express.json());
@@ -45,8 +44,8 @@ const dbLink =
   process.env.NODE_ENV !== 'production'
     ? 'mongodb://localhost:27017/TaskManager'
     : process.env.MONGO_CLIENT;
-// Server listening the port
 
+// Server listening the port
 mongoose
   .connect(dbLink)
   .then(() => {
