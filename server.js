@@ -1,4 +1,7 @@
 import express from 'express';
+
+import dotenv from 'dotenv';
+dotenv.config();
 import cors from 'cors';
 
 const app = express();
@@ -7,7 +10,8 @@ const PORT = 8000;
 import path from 'path';
 
 const __dirname = path.resolve();
-console.log(__dirname);
+// console.log(__dirname);
+// console.log(process.env);
 
 // Connecting Mongo database
 import { mongoConnect } from './src/config/mongoDB.js';
