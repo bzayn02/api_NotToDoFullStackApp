@@ -30,7 +30,7 @@ import taskRouter from './src/routers/taskRouter.js';
 app.use('/api/v1/task', taskRouter);
 
 app.use('/', (req, res) => {
-  res.sendFile(__dirname + '/build/index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 // Should be at the bottom
