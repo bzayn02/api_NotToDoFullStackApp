@@ -7,10 +7,7 @@ export const mongoConnect = async () => {
         ? 'mongodb://localhost:27017/TaskManager'
         : process.env.MONGO_CLIENT;
 
-    const con = await mongoose.connect(dbLink);
-    // console.log(con);
-    con && console.log('Mongo database is connected!');
-    return true;
+    return mongoose.connect(dbLink);
   } catch (error) {
     console.log(error.message);
     throw new Error(error);
